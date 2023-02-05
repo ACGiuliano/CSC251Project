@@ -120,14 +120,14 @@ public class Policy
     }
     public double getWeight()
     {
-        return holderHeight;
+        return holderWeight;
     }
 
     /** Method to calculate BMI for policyholder
      * using provided data */
     public double calcBMI()
     {
-       double bmi = (holderHeight * 703) / (Math.pow(holderHeight, 2.0)); // Math.pow method to raise a number to a power
+       double bmi = (holderWeight * 703) / (Math.pow(holderHeight, 2.0)); // Math.pow method to raise a number to a power
        return bmi;
     }
 
@@ -145,7 +145,7 @@ public class Policy
             polPrice += 100;
 
         if (bmi > 35)
-            polPrice += (bmi -35) * 20;
+            polPrice += (bmi - 35) * 20;
         
         return polPrice;
     }
