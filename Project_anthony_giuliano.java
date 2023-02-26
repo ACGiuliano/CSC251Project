@@ -8,6 +8,7 @@ public class Project_anthony_giuliano {
     {
         // Establish & declare variables
         int policyNumber = 0, age = 0;
+        int smokerCounter = 0, nonSmokerCounter = 0;
         String provider = "", firstName = "", lastName = "", smokeStatus = "";
         boolean smoker = false;
         double height = 0, weight = 0, bodyMass = 0;
@@ -19,11 +20,11 @@ public class Project_anthony_giuliano {
         // Set up scanner for file input
         Scanner readFile = new Scanner(myFile);
 
+        // Create ArrayList to hold all the policies
+        ArrayList<Policy> policyList = new ArrayList<Policy>();
+
         while(readFile.hasNext())
         {
-            // Create ArrayList to hold all the policies
-            ArrayList<Policy> policyList = new ArrayList<Policy>();
-
 
             // Collect input from file
             policyNumber = readFile.nextInt();
@@ -39,38 +40,48 @@ public class Project_anthony_giuliano {
             height = readFile.nextDouble();
             weight = readFile.nextDouble();
 
-            // Set smoker boolean variable using string input from user
+            // Set smoker boolean variable using string input from file
             if (smokeStatus.equalsIgnoreCase("smoker"))
             {   
                 smoker = true;
+                smokerCounter += 1;
             }
             else if (smokeStatus.equalsIgnoreCase("non-smoker"))
             {
                 smoker = false;
+                nonSmokerCounter += 1;
             }
             // Create Policy object using input data
             Policy userPolicy = new Policy(policyNumber, provider, firstName, lastName, age, smoker, height, weight);
 
             // Add policy to policyList ArrayList
             policyList.add(userPolicy);
+        }
 
+        // Use for loop to iterate through ArrayList and display each individual's policy information
+        for (int index = 0; index < policyList.size(); index++)
+        {
             // Determine BMI and store to variable for output
-            bodyMass = userPolicy.calcBMI();
+            bodyMass = policyList.get(index).calcBMI();
 
             // Format and display output
-            System.out.println("Policy Number: " + userPolicy.getPolicyNumber());
-            System.out.println("Provider Name: " + userPolicy.getProviderName());
-            System.out.println("Policyholder's First Name: " + userPolicy.getFirstName());
-            System.out.println("Policyholder's Last Name: " + userPolicy.getLastName());
-            System.out.println("Policyholder's Age: " + userPolicy.getAge());
+            System.out.println("Policy Number: " + policyList.get(index).getPolicyNumber());
+            System.out.println("Provider Name: " + policyList.get(index).getProviderName());
+            System.out.println("Policyholder's First Name: " + policyList.get(index).getFirstName());
+            System.out.println("Policyholder's Last Name: " + policyList.get(index).getLastName());
+            System.out.println("Policyholder's Age: " + policyList.get(index).getAge());
             System.out.println("Policyholder's Smoking Status: " + smokeStatus);
-            System.out.printf("Policyholder's Height: %.1f inches", userPolicy.getHeight());
-            System.out.printf("\nPolicyholder's Weight: %.1f pounds", userPolicy.getWeight());
+            System.out.printf("Policyholder's Height: %.1f inches", policyList.get(index).getHeight());
+            System.out.printf("\nPolicyholder's Weight: %.1f pounds", policyList.get(index).getWeight());
             System.out.printf("\nPolicyholder's BMI: %.2f", bodyMass);
-            System.out.printf("\nPolicy Price: $%.2f", userPolicy.policyCost(bodyMass));
+            System.out.printf("\nPolicy Price: $%.2f", policyList.get(index).policyCost(bodyMass));
             System.out.print("\n\n");
         }
-       
+        
+        // Display number of smokers & nonsmokers after all policies are output
+        System.out.println("The number of policies with a smoker is: " + smokerCounter);
+        System.out.println("The number of policies with a non-smoker is: " + nonSmokerCounter);
+
         // Close file scanner
         readFile.close();
     }
