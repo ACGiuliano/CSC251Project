@@ -30,7 +30,7 @@ public class Policy
         policyCounter++;
     }
 
-    public int getCount()
+    public static int getCount()
     {
         return policyCounter;
     }
@@ -102,8 +102,8 @@ public class Policy
         String str = "Policy Number: " + policyNum +
                     "\nProvider Name: " + providerName +
                     "\n" + holder.toString() +
-                    "\nPolicyholder's BMI: " + calcBMI() +
-                    "\nPolicy Price: " + policyCost(calcBMI());
+                    "\nPolicyholder's BMI: " + String.format("%.2f", calcBMI()) +
+                    "\nPolicy Price: $" + String.format("%.2f", policyCost(calcBMI())) + "\n";;
         return str;
     }
 }
