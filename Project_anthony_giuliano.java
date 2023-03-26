@@ -11,7 +11,7 @@ public class Project_anthony_giuliano {
         int smokerCounter = 0, nonSmokerCounter = 0;
         String provider = "", firstName = "", lastName = "", smokeStatus = "";
         boolean smoker = false;
-        double height = 0, weight = 0, bodyMass = 0;
+        double height = 0, weight = 0;
 
         // Set up file object
         // Chose to specify full file pathname due to CSC251Project folder not being recognized when using just the filename.
@@ -52,7 +52,8 @@ public class Project_anthony_giuliano {
                 nonSmokerCounter += 1;
             }
             // Create Policy object using input data
-            Policy userPolicy = new Policy(policyNumber, provider, firstName, lastName, age, smoker, height, weight);
+            PolicyHolder holder = new PolicyHolder(firstName, lastName, age, smoker, height, weight);
+            Policy userPolicy = new Policy(policyNumber, provider, holder);
 
             // Add policy to policyList ArrayList
             policyList.add(userPolicy);
@@ -61,25 +62,14 @@ public class Project_anthony_giuliano {
         // Use for loop to iterate through ArrayList and display each individual's policy information
         for (int index = 0; index < policyList.size(); index++)
         {
-            // Determine BMI and store to variable for output
-            bodyMass = policyList.get(index).calcBMI();
-
             // Format and display output
-            System.out.println("Policy Number: " + policyList.get(index).getPolicyNumber());
-            System.out.println("Provider Name: " + policyList.get(index).getProviderName());
-            System.out.println("Policyholder's First Name: " + policyList.get(index).getFirstName());
-            System.out.println("Policyholder's Last Name: " + policyList.get(index).getLastName());
-            System.out.println("Policyholder's Age: " + policyList.get(index).getAge());
-            System.out.println("Policyholder's Smoking Status: " + smokeStatus);
-            System.out.printf("Policyholder's Height: %.1f inches", policyList.get(index).getHeight());
-            System.out.printf("\nPolicyholder's Weight: %.1f pounds", policyList.get(index).getWeight());
-            System.out.printf("\nPolicyholder's BMI: %.2f", bodyMass);
-            System.out.printf("\nPolicy Price: $%.2f", policyList.get(index).policyCost(bodyMass));
-            System.out.print("\n\n");
+            System.out.println(policyList.get(index));
         }
         
+        //Display number of created policy objects
+        System.out.println("There were " + Policy.getCount() + " Policy objects created.");
         // Display number of smokers & nonsmokers after all policies are output
-        System.out.println("The number of policies with a smoker is: " + smokerCounter);
+        System.out.println("\nThe number of policies with a smoker is: " + smokerCounter);
         System.out.println("The number of policies with a non-smoker is: " + nonSmokerCounter);
 
         // Close file scanner
