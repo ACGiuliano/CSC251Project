@@ -86,4 +86,14 @@ public class Policy
         
         return polPrice;
     }
+
+    public String toString()
+    {
+        String str = "Policy Number: " + policyNum +
+                    "\nProvider Name: " + providerName +
+                    "\n" + holder.toString() +
+                    "\nPolicyholder's BMI: " + calcBMI() +
+                    "\nPolicy Price: " + policyCost(calcBMI());
+        return str;
+    }
 }
