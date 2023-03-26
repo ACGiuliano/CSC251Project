@@ -5,12 +5,15 @@ public class Policy
     private int policyNum;
     private String providerName;
     private PolicyHolder holder;
+    private static int policyCounter = 0;
 
     /** No-arg constuctor with default values that accepts no arguments */
     public Policy()
     {
         policyNum = 12345;
         providerName = "Insurance Company";
+
+        policyCounter++;
     }
 
     /** Argument accepting constructor 
@@ -23,6 +26,13 @@ public class Policy
         providerName = provName;
 
         holder = new PolicyHolder(hldr);
+
+        policyCounter++;
+    }
+
+    public int getCount()
+    {
+        return policyCounter;
     }
 
     /** Method to set policy number
