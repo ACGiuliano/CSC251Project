@@ -48,7 +48,7 @@ public class PolicyHolder
         holderAge = object2.holderAge;
         holderSmoker = object2.holderSmoker;
         holderHeight = object2.holderHeight;
-        holderWeight = object2.holderHeight;
+        holderWeight = object2.holderWeight;
     }
 
      /** Sets policyholder's first name
